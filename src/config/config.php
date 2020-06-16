@@ -37,8 +37,8 @@ return [
 	// If set to null, the default connection will be used.
 	'connection' => null,
 	// Name of the table used.
-	'table' => 'settings',
-	// If you want to use custom column names in database store you could 
+	'table' => 'system_settings',
+	// If you want to use custom column names in database store you could
 	// set them in this configuration
 	'keyColumn' => 'key',
 	'valueColumn' => 'value'

@@ -1,7 +1,7 @@
 <?php
 /**
  * Laravel 4 - Persistent Settings
- * 
+ *
  * @author   Andreas Lutro <anlutro@gmail.com>
  * @license  http://opensource.org/licenses/MIT
  * @package  l4-settings
@@ -54,6 +54,8 @@ class DatabaseSettingStore extends SettingStore
 	 * @var array
 	 */
 	protected $extraColumns = array();
+
+	protected $setColumns = array();
 
 	/**
 	 * @param \Illuminate\Database\Connection $connection
@@ -119,6 +121,11 @@ class DatabaseSettingStore extends SettingStore
 		$this->extraColumns = $columns;
 	}
 
+	public function updateColumns(array $Newcolumns)
+	{
+		$this->setColumns = $Newcolumns;
+	}
+
 	/**
 	 * {@inheritdoc}
 	 */
@@ -151,6 +158,7 @@ class DatabaseSettingStore extends SettingStore
 	protected function write(array $data)
 	{
 		$keysQuery = $this->newQuery();
+
 
 		// "lists" was removed in Laravel 5.3, at which point
 		// "pluck" should provide the same functionality.
@@ -205,6 +213,7 @@ class DatabaseSettingStore extends SettingStore
 			foreach ($data as $key => $value) {
 				$dbData[] = array_merge(
 					$this->extraColumns,
+					$this->setColumns,
 					array($this->keyColumn => $key, $this->valueColumn => $value)
 				);
 			}
@@ -266,9 +275,20 @@ class DatabaseSettingStore extends SettingStore
 		$query = $this->connection->table($this->table);
 
 		if (!$insert) {
-			foreach ($this->extraColumns as $key => $value) {
-				$query->where($key, '=', $value);
-			}
+				foreach ($this->extraColumns as $key => $value)
+				{
+						$query->where($key, '=', $value);
+				}
+
+				if(count($this->setColumns))
+				{
+						foreach ($this->setColumns as $k => $v)
+						{
+								$query->update(array($k=>$v));
+						}
+
+				}
+
 		}
 
 		if ($this->queryConstraint !== null) {

@@ -2,7 +2,7 @@
 
 /**
  * Laravel 4 - Persistent Settings
- * 
+ *
  * @author   Andreas Lutro <anlutro@gmail.com>
  * @license  http://opensource.org/licenses/MIT
  * @package  l4-settings
@@ -25,7 +25,7 @@ class SaveMiddleware implements LaravelIsStupidMiddleware
 {
 	/**
 	 * Create a new save settings middleware
-	 * 
+	 *
 	 * @param SettingStore $settings
 	 */
 	public function __construct(SettingStore $settings)
@@ -43,7 +43,7 @@ class SaveMiddleware implements LaravelIsStupidMiddleware
 	public function handle($request, Closure $next)
 	{
 		$response = $next($request);
-		
+
 		return $response;
 	}
 

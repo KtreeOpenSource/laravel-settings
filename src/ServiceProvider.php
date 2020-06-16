@@ -1,7 +1,7 @@
 <?php
 /**
  * Laravel 4 - Persistent Settings
- * 
+ *
  * @author   Andreas Lutro <anlutro@gmail.com>
  * @license  http://opensource.org/licenses/MIT
  * @package  l4-settings
@@ -36,7 +36,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 					$app->make('anlutro\LaravelSettings\SettingStore')->save();
 				});
 			}
-			
+
 			/**
 			 * Construct the actual manager.
 			 */

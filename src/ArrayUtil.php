@@ -1,7 +1,7 @@
 <?php
 /**
  * Laravel 4 - Persistent Settings
- * 
+ *
  * @author   Andreas Lutro <anlutro@gmail.com>
  * @license  http://opensource.org/licenses/MIT
  * @package  l4-settings
@@ -101,6 +101,7 @@ class ArrayUtil
 	 */
 	public static function set(array &$data, $key, $value)
 	{
+
 		$segments = explode('.', $key);
 
 		$key = array_pop($segments);
@@ -115,7 +116,6 @@ class ArrayUtil
 
 			$data =& $data[$segment];
 		}
-
 		$data[$key] = $value;
 	}
 
